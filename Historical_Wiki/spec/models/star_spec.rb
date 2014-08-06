@@ -9,6 +9,7 @@ describe Star do
 
     it 'should belong to a user' do
       @star.user = User.create(DUMMY_USER_HASH)
+      @star.starable = Comment.create
       @star.save
       expect(@star.user).to be_a(User)
       expect(@star.user.stars.all.count).to eq(1)
