@@ -7,8 +7,6 @@ class CreateStars < ActiveRecord::Migration
       t.integer :starable_id
       t.string :starable_type
 
-
-
       t.timestamps
     end
   end

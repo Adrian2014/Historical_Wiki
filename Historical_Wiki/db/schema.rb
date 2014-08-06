@@ -17,36 +17,56 @@ ActiveRecord::Schema.define(version: 20140806183111) do
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.string   "comment_text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "images", force: true do |t|
+    t.integer  "post_id"
+    t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "post_tags", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "post_title"
+    t.text     "post_text"
+    t.string   "post_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "stars", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "ratings"
+    t.integer  "starable_id"
+    t.string   "starable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "tags", force: true do |t|
+    t.string   "tag_text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
+    t.integer  "admin_id"
+    t.string   "email"
+    t.string   "username"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
