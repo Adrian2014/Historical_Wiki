@@ -1,27 +1,47 @@
 == README
+#WELCOME TO HISTORICAL WIKI
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+For our five day project we created a wiki timeline.
 
-* Ruby version
+Users can create posts, comment on posts, and tag posts.  We wanted anyone to be able to see the timeline, but only wanted users who are signed in to be able to edit the page.  We wanted users (signed in or not) to be able to search for specific, posts or tags.  We wanted users who created posts to be the only people who could edit their post, but want any signed in user to be able to comment on a post.  We wanted signed in users to also be able to rate other users comments.
 
-* System dependencies
+___________________________________________________________________
 
-* Configuration
 
-* Database creation
+#Get Started -->
 
-* Database initialization
+In order to get started, all you have to do is go to our webpage, and you can see the visual representation of our timeline.  In order to create a post or comment, you must register as a user.  If our wiki community consistently finds that the information you post on the timeline is false, your creator user status will be revoked.
 
-* How to run the test suite
+Working with our code.  If you plan on cloning this page, you will need rails version 4.1.4, and a working computer.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
+____________________________________________________________________
+
+#Dependencies -->
+
+When we are finished, we will publish our gem page
+
+
+
+
+____________________________________________________________________
+
+#Configuration Instructions -->
+
+Download a browser, probably hard for you to read this without one.
+
+
+
+____________________________________________________________________
+#Contributing and Licensing -->
+
+
+The MIT License (MIT)
+Copyright (c) 2014 Adrian
+
 
 
 Please feel free to use a different markup language if you do not plan to run
