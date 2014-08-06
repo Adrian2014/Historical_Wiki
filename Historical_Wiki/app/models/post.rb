@@ -12,4 +12,6 @@ class Post < ActiveRecord::Base
     has_many :tags, through: :post_tags
     has_many :comments
     has_one :image
+
+    has_many :stars, as: :starable
 end
