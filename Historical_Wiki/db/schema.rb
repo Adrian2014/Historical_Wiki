@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140806183111) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.string   "post_title"
-    t.string   "post_text"
+    t.text     "post_text"
     t.string   "post_date"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,13 @@
+  <h1>Sign in!</h1>
+
+
+  <%= form_for @user, url: {action: "login"}, html: {id: "login_form"} do |f| %>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li style='color:red'><%= msg %></li>
+    <% end %>
+    </ul>
+    <%= f.text_field :email, placeholder: "Email" %><br>
+    <%= f.password_field :password, placeholder: "Password" %><br>
+    <%= f.submit "Sign In!" %>
+  <% end %>
