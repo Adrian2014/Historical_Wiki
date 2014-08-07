@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = Post.where(user_id: session[:id])
+    @posts = Post.find_by(user_id: session[:id])
   end
 
   def login
