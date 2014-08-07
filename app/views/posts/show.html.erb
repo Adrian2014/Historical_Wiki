@@ -4,7 +4,10 @@
  <h1><u><%= @post.post_title %></u></h1></br>
  <%= @post.post_text %></br>
  <%= @post.post_date %></br>
- <%= @post.user_id %></br>
+
+ <% if current_user != nil %>
+ <%= link_to "Create Comment", controller: "comments", action: "new" %>
+ <% end %>
 
 </br>
 
