@@ -1,1 +1,19 @@
-<h1>BLAH</h1>
+<h1>Welcome to your Posts Page</h1>
+
+<ol>
+  <% @posts.each do |post| %>
+
+    <li>
+      <%= link_to post.post_title, post %></br>
+      <%= post.post_date %></br>
+
+    
+      <%= link_to 'Edit', edit_post_path(post) %> |
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li></br>
+   
+ 
+<% end %>
+</ol>
+
+<%= link_to 'New Post', new_post_path %>

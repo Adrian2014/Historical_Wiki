@@ -15,4 +15,8 @@ class Post < ActiveRecord::Base
     has_one :image
 
     has_many :stars, as: :starable
+
+    def date
+      @date ||= Date.parse(self.post_date)
+    end
 end

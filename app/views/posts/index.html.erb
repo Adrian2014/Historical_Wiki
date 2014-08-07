@@ -1,4 +1,12 @@
+
+<% if current_user == nil %>
+<%= link_to 'Sign In', controller: "users", action: "login" %>
+<% end %>
+
+
 <h1>Listing posts</h1>
+
+
 
 <table>
   <thead>
@@ -14,10 +22,6 @@
       <li>
         <%= link_to post.post_title, post %></br>
         <%= post.post_date %></br>
-
-        
-        <%= link_to 'Edit', edit_post_path(post) %> |
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
       </li> </br>
        
      
@@ -29,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+
