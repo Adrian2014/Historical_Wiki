@@ -1,4 +1,12 @@
+
+<% if current_user == nil %>
+<%= link_to 'Sign In', controller: "users", action: "login" %>
+<% end %>
+
+
 <h1>Listing posts</h1>
+
+
 
 <table>
   <thead>
