@@ -8,8 +8,12 @@ Rails.application.routes.draw do
   get 'users/logout' => 'users#logout'
 
   get 'posts/getdata' => 'posts#get_data'
-  resources :posts
 
+  get 'posts/:id/comments/new' => 'comments#new'
+  post 'posts/:id/comments/new' => 'comments#create'
+
+
+  resources :posts
 
   root 'posts#index'
 

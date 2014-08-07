@@ -3,6 +3,10 @@
 # Table name: posts
 #
 #  id         :integer          not null, primary key
+#  user_id    :integer
+#  post_title :string(255)
+#  post_text  :text
+#  post_date  :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -23,7 +27,7 @@ class Post < ActiveRecord::Base
     has_many :stars, as: :starable
 
     def date
-      @date ||= Date.parse(self.post_date)
+      @date ||= Date.parse(self.post_date.to_s)
     end
 
     def year
