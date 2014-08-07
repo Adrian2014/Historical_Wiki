@@ -1,0 +1,34 @@
+.timeline {
+  margin: 50px;
+}
+
+.timeline .canvas{
+  position: relative;
+  border: 1px solid black;
+  height: 30px;
+  background-color: #EECCCC;
+}
+
+.timeline .start-date{
+  float:left;
+}
+
+.timeline .end-date{
+  float:right;
+}
+
+.clear{
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.timeline .canvas .block {
+  position:relative;
+  height: 10px;
+  margin: 0 2px;
+  box-sizing: content-box;
+}
+
+.timeline .dropdown {
+  position:absolute;
+}

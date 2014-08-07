@@ -18,11 +18,11 @@ feature 'Users who are not signed in' do
     end
 
     it 'cannot edit posts' do
-      expect(page).to have_no_link("Edit", edit_post_url(@post))
+      expect(page).to have_no_link("", edit_post_path(@post))
     end
 
     it 'cannot delete posts' do
-      expect(page).to have_no_link("Destroy", post_url(@post))
+      expect(page).to have_no_css("a[data-method='delete'][href='#{post_path(@post)}']")
     end
   end
 
