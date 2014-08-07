@@ -14,22 +14,6 @@ class Post < ActiveRecord::Base
       Post.where(post_date: start_date..end_date).order(:post_date)
     end
 
-    def self.get_data(start_year, end_year, precision)
-      posts = Post.between_years(start_year, end_year).to_a
-      data = Hash.new
-      block = start_year/precision
-
-      posts.each do |post|
-        while post.year >= (block+1)*precision
-          block += 1
-        end
-        data[block] = [] unless data[block]
-        data[block].push post
-      end
-
-      return data
-    end
-
     belongs_to :user
     has_many :post_tags
     has_many :tags, through: :post_tags

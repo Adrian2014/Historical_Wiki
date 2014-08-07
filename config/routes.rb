@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get 'users/show' => 'users#show'
   get 'users/logout' => 'users#logout'
 
+  get 'posts/getdata' => 'posts#get_data'
   resources :posts
+
 
   root 'posts#index'
 

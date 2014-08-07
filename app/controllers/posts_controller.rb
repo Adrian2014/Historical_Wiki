@@ -62,6 +62,28 @@ class PostsController < ApplicationController
     end
   end
 
+  def get_data
+    start_year = params['start_year'].to_i
+    end_year = params['end_year'].to_i
+    precision = params['precision'].to_i
+
+    posts = Post.between_years(start_year, end_year).to_a
+    data = Hash.new
+    block = start_year/precision
+
+    posts.each do |post|
+      while post.year >= (block+1)*precision
+        block += 1
+      end
+      data[block] = [] unless data[block]
+      data[block].push post
+    end
+
+    respond_to do |format|
+      format.json { render json:data }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
