@@ -28,3 +28,9 @@ module HistoricalWiki
     # config.i18n.default_locale = :de
   end
 end
+
+config.assets.precompile += [
+    'timeline.js',
+    'timeline.css',
+    'application.css'
+]
