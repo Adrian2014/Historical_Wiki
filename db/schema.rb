@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140806183111) do
     t.integer  "user_id"
     t.string   "post_title"
     t.text     "post_text"
-    t.string   "post_date"
+    t.date     "post_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
