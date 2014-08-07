@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.new
+    # @user = User.new # this is now done in the view
     render :login
   end
 
