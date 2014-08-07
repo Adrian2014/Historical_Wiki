@@ -23,12 +23,25 @@
 }
 
 .timeline .canvas .block {
-  position:relative;
-  height: 10px;
-  margin: 0 2px;
+  position:absolute;
+  height: 26px;
   box-sizing: content-box;
+  background-color: #CCCCFF;
+  border: 1px solid white;
 }
 
 .timeline .dropdown {
   position:absolute;
+  background: #CCCCFF;
+  border: 1px solid black;
+
+  padding: 5px;
 }
+
+.timeline .dropdown li {
+  margin: 5px;
+}
+
+.timeline .dropdown li:hover {
+  color: white;
+};
