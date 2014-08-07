@@ -1,4 +1,6 @@
-== README   [ ![Codeship Status for Adrian2014/Historical_Wiki](https://www.codeship.io/projects/713ecb90-00ae-0132-cb2f-5247614ee66f/status)](https://www.codeship.io/projects/30022)
+[ ![Codeship Status for Adrian2014/Historical_Wiki](https://www.codeship.io/projects/713ecb90-00ae-0132-cb2f-5247614ee66f/status)](https://www.codeship.io/projects/30022)
+
+== README 
 
 ==WELCOME TO HISTORICAL WIKI
 
