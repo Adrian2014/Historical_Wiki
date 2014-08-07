@@ -8,13 +8,22 @@
   </thead>
 
   <tbody>
+    <ol>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  
+      <li>
+        <%= link_to post.post_title, post %></br>
+        <%= post.post_date %></br>
+
+        
+        <%= link_to 'Edit', edit_post_path(post) %> |
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li> </br>
+       
+     
     <% end %>
+    </ol>
+
   </tbody>
 </table>
 
