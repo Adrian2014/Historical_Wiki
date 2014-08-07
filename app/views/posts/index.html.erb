@@ -2,6 +2,8 @@
 
 <h1>Listing posts</h1>
 
+
+
 <table>
   <thead>
     <tr>
@@ -12,17 +14,13 @@
   <tbody>
     <ol>
     <% @posts.each do |post| %>
-  
+
       <li>
         <%= link_to post.post_title, post %></br>
         <%= post.post_date %></br>
-
-        
-        <%= link_to 'Edit', edit_post_path(post) %> |
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
       </li> </br>
-       
-     
+
+
     <% end %>
     </ol>
 
@@ -31,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+
