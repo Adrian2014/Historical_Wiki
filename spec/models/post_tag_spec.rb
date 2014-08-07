@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: post_tags
+#
+#  id         :integer          not null, primary key
+#  post_id    :integer
+#  tag_id     :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'rails_helper'
 
 describe PostTag do

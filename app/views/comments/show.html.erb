@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+
+ <h1><u><%= @comment.post_title %></u></h1></br>
+ <%= @comment.post_text %></br>
+ <%= @comment.post_date %></br>
+
+ <% if current_user != nil %>
+ <%= link_to "Create Comment", controller: "comments", action: "new" %>
+ <% end %>
+
+</br>
+
+<%= link_to 'Back', posts_path %>

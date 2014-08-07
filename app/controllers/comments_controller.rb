@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
 
+  # GET /comment/new
   def new
     @comment = Comment.new
   end
@@ -7,19 +8,20 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = session[:id]
+    @comment.post_id = params[:id]
 
-    if @user.save
-      session[:id] = @user.id
-      redirect_to users_show_path
+    if @comment.save
+      redirect_to  "/posts/#{@comment.post_id}"
     else
-      render :new
+
+
     end
   end
 
 
   private
   def comment_params
-    params.require(:post).permit(:comment_id, :post_id)
+    params.require(:comment).permit(:comment_text)
   end
 
 end

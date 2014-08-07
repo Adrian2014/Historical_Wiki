@@ -4,6 +4,11 @@
  <h1><u><%= @post.post_title %></u></h1></br>
  <%= @post.post_text %></br>
  <%= @post.post_date %></br>
+ <ol>
+     <% @comments.each do |comment| %>
+        <li><%=comment.comment_text  %></li>
+     <%end %>
+</ol>
 
  <% if current_user != nil %>
  <%= link_to "Create Comment", controller: "comments", action: "new" %>
