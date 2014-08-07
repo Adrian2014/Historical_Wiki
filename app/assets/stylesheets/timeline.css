@@ -1,0 +1,18 @@
+.timeline .canvas{
+  border: 1px solid black;
+  height: 10px;
+  background-color: #EECCCC;
+}
+
+.timeline .start-date{
+  float:left;
+}
+
+.timeline .end-date{
+  float:right;
+}
+
+.clear{
+  clear: both;
+  margin-bottom: 20px;
+}
