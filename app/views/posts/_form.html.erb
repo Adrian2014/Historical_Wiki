@@ -12,10 +12,26 @@
   <% end %>
 
   <div class="create_new_post">
-    <%= f.text_field :post_title, placeholder: "Title" %><br>
-    <%= f.text_area :post_text, placeholder: "Text" %><br>
-    <%= f.date_field :post_date %><br>
-    
-    <%= f.submit %>
+    <div class="row">
+      <div class="small-6 columns">
+        <%= f.text_field :post_title, placeholder: "Title" %>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="small-4 columns">
+        <%= f.date_field :post_date %>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-9 columns">
+        <%= f.text_area :post_text, placeholder: "Text" %>
+      </div>
+    </div><br />
+
+        <%= f.submit "Submit", class: "button [radius round]" %>
+
   </div>
 <% end %>

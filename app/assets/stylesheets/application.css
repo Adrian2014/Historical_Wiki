@@ -16,9 +16,9 @@
 
  section.pageheader {
   background-image: url("/assets/header.jpg");
-  background-size: auto 200px;
-  height: 200px;
-  padding: 88px 118px;
+  background-size: auto 100px;
+  height: 100px;
+  padding: 40px 100px;
  }
 
  section.pageheader h1 {
@@ -26,6 +26,7 @@
   font-size: 42px;
   margin: 0;
   margin-top: auto;
+  text-shadow: 0px 0px 30px rgba(255, 255, 255, 1)
  }
 
 section.pageheader img {
@@ -41,3 +42,47 @@ nav.top-bar ul li a {
   text-decoration: none;
 }
 
+div.form_container {
+  max-width: 800px;
+  width: auto;
+  margin-left: 15%;
+  border: 1px solid gray;
+}
+
+div.row {
+  margin-left: 0;
+}
+
+input[type="text"] {
+  float: left;
+}
+
+.button, submit {
+  background: #333;
+}
+
+.button:hover, submit:hover{
+  background: #272727;
+}
+
+.button:visited {
+  color: #fff;
+}
+
+@media screen and (max-width: 980px) {
+
+  section.pageheader {
+    background-size: auto;
+    height: 60px;
+    padding-top: 30px;
+    padding-left: 40px;
+   }
+
+   section.pageheader h1 {
+    font-size: 32px;
+    margin: 0;
+    margin-top: auto;
+    text-shadow: 0px 0px 30px rgba(255, 255, 255, 1)
+   }
+
+}
