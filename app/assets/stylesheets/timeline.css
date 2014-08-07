@@ -1,4 +1,9 @@
+.timeline {
+  margin: 50px;
+}
+
 .timeline .canvas{
+  position: relative;
   border: 1px solid black;
   height: 10px;
   background-color: #EECCCC;
