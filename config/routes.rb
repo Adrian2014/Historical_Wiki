@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get 'users/logout' => 'users#logout'
 
   get 'posts/getdata' => 'posts#get_data'
+
+  get 'post/:id/comments/new' => 'comments#new'
+
   resources :posts
 
 
