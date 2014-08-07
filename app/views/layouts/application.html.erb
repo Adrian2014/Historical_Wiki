@@ -20,7 +20,7 @@
     <section class="top-bar-section">
       <ul class="right">
         <% if current_user != nil %>
-          <li><%= link_to "Welcome " + current_user.username.capitalize, controller: "users", action: "show" %></a></li>
+          <li><%= link_to "Welcome " + current_user.username.capitalize, controller: "users", action: "show" %></li>
           <li><%= link_to "Log out", controller: "users", action: "logout" %></li>
         <% else %>
           <li><%= link_to 'Sign In', controller: "users", action: "login" %></li>
