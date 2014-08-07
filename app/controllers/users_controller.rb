@@ -26,8 +26,8 @@ class UsersController < ApplicationController
 
 
   def login_post
-    data = params[:data]
-    @user = User.find_by(email: data[:email])
+    data = params[:user]
+    user = User.find_by(email: data[:email])
     auth = user.try(:authenticate, data[:password])
 
     if auth
