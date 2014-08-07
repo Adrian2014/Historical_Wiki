@@ -9,10 +9,11 @@ Rails.application.routes.draw do
 
   get 'posts/getdata' => 'posts#get_data'
 
-  get 'post/:id/comments/new' => 'comments#new'
+  get 'posts/:id/comments/new' => 'comments#new'
+  post 'posts/:id/comments/new' => 'comments#create'
+
 
   resources :posts
-
 
   root 'posts#index'
 
