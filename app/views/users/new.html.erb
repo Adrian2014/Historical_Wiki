@@ -9,22 +9,27 @@
     </ul>
     <div class="row">
       <div class="small-4 columns">
-        <%= f.text_field :username, placeholder: "Username" %>
+        <%= f.text_field :username, id: 'username', placeholder: "Username", class: 'input-text' %>
+        <label class="label-helper" for="password">Username</label>
       </div>
     </div>
     <div class="row">
       <div class="small-4 columns">
-        <%= f.text_field :email, placeholder: "Email" %>
+        <%= f.text_field :email, id: 'email', placeholder: "Email", class: 'input-text' %>
+        <label class="label-helper" for="email">Email</label>
+        <label class="label-helper" for="email">Email</label>
       </div>
     </div>
     <div class="row">
       <div class="small-4 columns">
-        <%= f.password_field :password, placeholder: "Password" %>
+        <%= f.password_field :password, id: 'password', placeholder: "Password", class: 'input-text' %>
+        <label class="label-helper" for="password">Password</label>
       </div>
     </div>
     <div class="row">
       <div class="small-4 columns">
-        <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>
+        <%= f.password_field :password_confirmation, id: 'password_confirmation', placeholder: "Password Confirmation", class: 'input-text' %>
+        <label class="label-helper" for="password_confirmation">Password Confirmation</label>
       </div>
     </div>
     <div class="row">
