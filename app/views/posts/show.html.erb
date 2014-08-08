@@ -3,7 +3,7 @@
 
  <h1><u><%= @post.post_title %></u></h1></br>
  <%= @post.post_text %></br>
- <%= @post.post_date.strftime("%m/%d/%Y") %></br>
+ <%= @post.post_date %></br>
  <ol>
      <% @comments.each do |comment| %>
         <li><%=comment.comment_text  %></li>
