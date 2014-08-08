@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20140806183111) do
     t.datetime "updated_at"
   end
 
+  add_index "posts", ["post_date"], name: "index_posts_on_post_date", using: :btree
+
   create_table "stars", force: true do |t|
     t.integer  "user_id"
     t.integer  "ratings"
