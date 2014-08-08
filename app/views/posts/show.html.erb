@@ -2,6 +2,12 @@
 
 
  <h1><u><%= @post.post_title %></u></h1></br>
+ <% @tags.each do |tag| %>
+     <%=link_to "#{tag.tag_text}", "/tags/#{tag.tag_text}" %>
+ <% end %>
+ </br>
+ </br>
+ </br>
  <%= @post.post_text %></br>
  <%= @post.post_date %></br>
  <ol>
