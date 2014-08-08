@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'posts/:id/comments/new' => 'comments#new'
   post 'posts/:id/comments/new' => 'comments#create'
 
+  get 'tags/:tag_name' => 'tags#show'
+
 
   resources :posts
 

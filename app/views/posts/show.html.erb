@@ -2,6 +2,12 @@
 
 
  <h1><u><%= @post.post_title %></u></h1></br>
+ <% @tags.each do |tag| %>
+     <%=link_to "#{tag.tag_text}", "/tags/#{tag.tag_text}" %>
+ <% end %>
+ </br>
+ </br>
+ </br>
  <%= @post.post_text %></br>
  <%= @post.post_date %></br>
  <ol>
@@ -11,9 +17,9 @@
 </ol>
 
  <% if current_user != nil %>
- <%= link_to "Create Comment", controller: "comments", action: "new" %>
+ <%= link_to "Create Comment", {controller: "comments", action: "new"}, class: "button small [radius round]" %>
  <% end %>
 
 </br>
 
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path, class: "button small [radius round]" %>

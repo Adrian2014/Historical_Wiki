@@ -11,11 +11,13 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @comments = Comment.where(post_id: params[:id])
+    @tags = Post.find(params[:id]).tags
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    @tag = Tag.new
   end
 
   # GET /posts/1/edit
@@ -26,6 +28,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.tags << Tag.new(tag_params)
     @post.user_id = session[:id]
 
     respond_to do |format|
@@ -83,5 +86,9 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:post_title, :post_text, :post_date)
+  end
+
+  def tag_params
+    params.require(:tag).permit(:tag_text)
   end
 end
