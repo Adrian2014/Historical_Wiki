@@ -17,9 +17,9 @@
 </ol>
 
  <% if current_user != nil %>
- <%= link_to "Create Comment", controller: "comments", action: "new" %>
+ <%= link_to "Create Comment", {controller: "comments", action: "new"}, class: "button small [radius round]" %>
  <% end %>
 
 </br>
 
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path, class: "button small [radius round]" %>

@@ -17,14 +17,21 @@
       </div>
     </div>
     <div class="row">
+<<<<<<< HEAD
       <div class="small-4 columns">
         <%= f.date_field :post_date %>
+=======
+        <div class="small-4 columns">
+        <%= f.date_field :post_date, format: :short %>
+
+>>>>>>> 1cd25ceb6514f942b976deeba1ba0e92bb7e7d0e
       </div>
     </div>
     <div class="row">
       <div class="small-9 columns">
         <%= f.text_area :post_text, placeholder: "Text" %>
       </div>
+<<<<<<< HEAD
     </div>
     <%= fields_for @tag do |f| %>
       <div class="row">
@@ -35,5 +42,14 @@
     <% end %>
     <br />
     <%= f.submit "Submit", class: "button [radius round]" %>
+=======
+    </div><br />
+    <div class="row">
+      <div class="small-4 columns">
+        <%= f.submit "Submit", class: "button small [radius round]" %>
+      </div>
+    </div>
+
+>>>>>>> 1cd25ceb6514f942b976deeba1ba0e92bb7e7d0e
   </div>
 <% end %>

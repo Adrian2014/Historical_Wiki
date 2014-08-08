@@ -4,16 +4,20 @@
   <% @posts.each do |post| %>
 
     <li>
-      <%= link_to post.post_title, post %></br>
-      <%= post.post_date %></br>
+      <%= link_to post.post_title, post %>
+      <%= post.post_date.strftime("%m/%d/%Y") %>
 
-    
-      <%= link_to 'Edit', edit_post_path(post) %> |
-      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li></br>
-   
- 
+      <%= link_to 'Edit', edit_post_path(post), class: "button tiny [radius round]" %>
+
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny [radius round]" %>
+
+    </li>
+
 <% end %>
 </ol>
 
-<%= link_to 'New Post', new_post_path %>
+<div class="row">
+  <div class="small-4 columns">
+    <%= link_to 'New Post', new_post_path, class: "button small [radius round]" %>
+  </div>
+</div>
