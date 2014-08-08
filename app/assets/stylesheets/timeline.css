@@ -1,12 +1,15 @@
 .timeline {
   margin: 50px;
+  position: relative;
 }
 
 .timeline .canvas{
+  overflow:hidden;
   position: relative;
   border: 1px solid black;
   height: 30px;
-  background-color: #EECCCC;
+  background-color: #DDDDEE;
+  width: 100%;
 }
 
 .timeline .start-date{
@@ -23,15 +26,13 @@
 }
 
 .timeline .canvas .block {
-  position:absolute;
-  height: 26px;
-  box-sizing: content-box;
-  background-color: #CCCCFF;
-  border: 1px solid white;
+  position: relative;
+  stroke: white;
 }
 
 .timeline .dropdown {
   position:absolute;
+  top: 30px;
   background: #CCCCFF;
   border: 1px solid black;
 
@@ -44,4 +45,14 @@
 
 .timeline .dropdown li:hover {
   color: white;
-};
+}
+
+
+.q0 { fill:none; stroke-width: 0; }
+.q1 { fill: #555555; }
+.q2 { fill: #6C5F5E; }
+.q3 { fill: #826561; }
+.q4 { fill: #996A5E; }
+.q5 { fill: #B06E56; }
+.q6 { fill: #C67247; }
+.q7 { fill: #DD7733; }
