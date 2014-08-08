@@ -3,7 +3,7 @@
 
  <h1><u><%= @post.post_title %></u></h1></br>
  <%= @post.post_text %></br>
- <%= @post.post_date %></br>
+ <%= @post.post_date.strftime("%m/%d/%Y") %></br>
  <ol>
      <% @comments.each do |comment| %>
         <li><%=comment.comment_text  %></li>
@@ -11,7 +11,7 @@
 </ol>
 
  <% if current_user != nil %>
- <%= link_to "Create Comment", controller: "comments", action: "new", class: "button small [radius round]" %>
+ <%= link_to "Create Comment", {controller: "comments", action: "new"}, class: "button small [radius round]" %>
  <% end %>
 
 </br>
