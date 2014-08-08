@@ -27,14 +27,15 @@ class UsersController < ApplicationController
 
   def login_post
     data = params[:user]
-    user = User.find_by(email: data[:email])
-    auth = user.try(:authenticate, data[:password])
+    @user = User.find_by(email: data[:email])
+    auth = @user.try(:authenticate, data[:password])
 
     if auth
-      session[:id] = user.id
+      session[:id] = @user.id
       redirect_to '/'
     else
-      # flash[:error] = "Invalid email/password. Please try again!"
+      @errors = "Invalid email/password. Please try again!"
+      @user = User.new(email: data[:email])
       render :login
     end
   end
