@@ -13,7 +13,8 @@
   <div class="create_new_comment">
     <div class="row">
       <div class="small-9 columns">
-        <%= f.text_area :comment_text, placeholder: "Comment Here!" %><br>
+        <%= f.text_area :comment_text, id: 'comment_text', placeholder: "Comment Here!", class: 'input-text' %>
+        <label class="label-helper" for="comment_text">Comment</label><br>
       </div>
     </div>
     <div class="row">

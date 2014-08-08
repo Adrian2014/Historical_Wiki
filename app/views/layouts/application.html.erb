@@ -18,6 +18,13 @@
     <h1>Historical Wiki</h1>
   </section>
   <nav class="top-bar" data-topbar>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="/">Home</a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
     <section class="top-bar-section">
       <ul class="right">
         <% if current_user != nil %>
@@ -28,9 +35,6 @@
           <li><%= link_to "Register", controller: "users", action: "new" %></li>
         <% end %>
       </ul>
-      <ul class="left">
-        <li><a href="/">Home</a></li>
-      </ul>
     </section>
   </nav>
   <section class="container">
@@ -38,5 +42,9 @@
 <%= yield %>
 
   </section>
+
+  <script src="/assets/foundation.js"></script>
+  <script src="/assets/foundation.topbar.js"></script>
+  <script>$(document).foundation();</script>
 </body>
 </html>
