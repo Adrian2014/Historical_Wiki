@@ -1,6 +1,6 @@
   <!-- <div class="form_container"> -->
     <h1>Sign in!</h1>
-    <%= form_for User.new, url: {action: "login"}, html: {id: "login_form"} do |f| %>
+    <%= form_for @user, url: {action: "login_post"}, html: {id: "login_form"} do |f| %>
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li style='color:red'><%= msg %></li>
