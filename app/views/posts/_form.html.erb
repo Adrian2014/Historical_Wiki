@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="small-4 columns">
-        <%= f.date_field :post_date,  data-customforms: "disabled" %>
+        <%= f.date_field :post_date %>
 
       </div>
     </div>
@@ -30,8 +30,11 @@
         <%= f.text_area :post_text, placeholder: "Text" %>
       </div>
     </div><br />
-
-        <%= f.submit "Submit", class: "button [radius round]" %>
+    <div class="row">
+      <div class="small-4 columns">
+        <%= f.submit "Submit", class: "button small [radius round]" %>
+      </div>
+    </div>
 
   </div>
 <% end %>
