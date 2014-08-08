@@ -26,11 +26,7 @@ class Post < ActiveRecord::Base
 
     has_many :stars, as: :starable
 
-    def date
-      @date ||= Date.parse(self.post_date.to_s)
-    end
-
     def year
-      self.date.year
+      self.post_date.year
     end
 end
