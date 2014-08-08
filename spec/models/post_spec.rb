@@ -45,4 +45,28 @@ describe Post do
       expect(@post.user.posts.last.id).to eq(@post.id)
     end
   end
+
+  describe '.between_years' do
+    before do
+      Post.create(post_date: "500-01-01")
+      Post.create(post_date: "1000-01-01")
+      Post.create(post_date: "1500-01-01")
+    end
+
+    it 'should return all posts found between two years' do
+      expect(Post.between_years(800, 1200).count).to eq(1)
+      expect(Post.between_years(800, 1700).count).to eq(2)
+    end
+
+    it 'should include the starting year, but not the ending year' do
+      expect(Post.between_years(500, 1000).count).to eq(1)
+    end
+  end
+
+  describe '#year' do
+    it 'should return the year of a post' do
+      @post = Post.create(post_date: "1434-12-05")
+      expect(@post.year).to eq(1434)
+    end
+  end
 end

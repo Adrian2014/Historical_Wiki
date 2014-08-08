@@ -63,26 +63,15 @@ class PostsController < ApplicationController
     end
   end
 
+  # returns a json object containing Post objects:
+  # For each comment, return the id, title, and date
   def get_data
-    start_year = params['start_year'].to_i
-    end_year = params['end_year'].to_i
-    precision = params['precision'].to_i
+    @posts = Post.all.order(:post_date)
+    @first_year = (params['start_year'] || 1900).to_i
+    @last_year  = (params['end_year'] || 2000).to_i
+    @precision  = (params['precision'] || 10).to_i
 
-    posts = Post.between_years(start_year, end_year).to_a
-    data = Hash.new
-    block = start_year/precision
-
-    posts.each do |post|
-      while post.year >= (block+1)*precision
-        block += 1
-      end
-      data[block] = [] unless data[block]
-      data[block].push post
-    end
-
-    respond_to do |format|
-      format.json { render json:data }
-    end
+    render 'data.json.jbuilder'
   end
 
   private
