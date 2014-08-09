@@ -13,25 +13,28 @@
   <div class="create_new_post">
     <div class="row">
       <div class="small-6 columns">
-        <%= f.text_field :post_title, placeholder: "Title" %>
+        <%= f.text_field :post_title, id: 'post_title', placeholder: "Title", class: 'input-text' %>
+        <label class="label-helper" for="post_title">Title</label>
       </div>
     </div>
     <div class="row">
 
         <div class="small-4 columns">
-        <%= f.date_field :post_date, format: :short %>
+        <%= f.date_field :post_date, id: 'post_date', format: :short, class: 'input-text' %>
+        <label class="label-helper" for="post_date">Date</label>
 
       </div>
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <%= f.text_area :post_text, placeholder: "Text" %>
+        <%= f.text_area :post_text, id: 'post_text', placeholder: "Text", class: 'input-text' %>
+        <label class="label-helper" for="post_text">Text</label>
       </div>
     </div>
     <%= fields_for @tag do |f| %>
       <div class="row">
         <div class="small-4 columns">
-          <%= f.text_field :tag_text, placeholder: "Tags"%>
+          <%= f.text_field :tag_text, placeholder: "Tag(s) Seperated by Comma(s) ',' ", class: 'input-text'%>
         </div>
       </div>
     <% end %>

@@ -22,6 +22,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @tag = Tag.new
+    @tags = Tag.where(post_id: params[:id])
   end
 
   # POST /posts
@@ -45,8 +47,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
+    tag = Tag.new(tag_params)
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params) && tag.save
+        @post.tags << tag
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -87,7 +92,6 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:post_title, :post_text, :post_date)
   end
-
   def tag_params
     params.require(:tag).permit(:tag_text)
   end
