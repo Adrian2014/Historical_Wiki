@@ -1,8 +1,10 @@
 class TagsController < ApplicationController
 
-  # GET /tag/:name
+  # GET /tag/:id
   def show
-    tag_name = params[:tag_name]
-    @tags = Tag.where(tag_text: tag_name)
+    puts params
+    tag_slug = params[:id].parameterize
+    @tag = Tag.find_by(tag_slug: tag_slug)
+    @posts = @tag.posts
   end
 end

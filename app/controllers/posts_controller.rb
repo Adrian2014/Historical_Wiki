@@ -23,14 +23,21 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @tag = Tag.new
-    @tags = Tag.where(post_id: params[:id])
+    @tags = @post.tags
   end
 
   # POST /posts
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.tags << Tag.new(tag_params)
+
+    @post.tags = []
+
+    params["tag"]["tag_text"].split(",").map(&:strip).each do |tag_text|
+      new_tag = Tag.find_by(tag_slug: tag_text.parameterize) || Tag.create(tag_text: tag_text)
+      new_tag.posts.push @post unless new_tag.posts.find_by(id: @post.id)
+    end
+
     @post.user_id = session[:id]
 
     respond_to do |format|
@@ -48,10 +55,16 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
 
-    tag = Tag.new(tag_params)
+    @post.tags = []
+
+    params["tag"]["tag_text"].split(",").map(&:strip).each do |tag_text|
+      puts tag_text
+      new_tag = Tag.find_or_create_by(tag_text: tag_text, tag_slug: tag_text.parameterize)
+      new_tag.posts.push @post unless new_tag.posts.find_by(id: @post.id)
+    end
+
     respond_to do |format|
-      if @post.update(post_params) && tag.save
-        @post.tags << tag
+      if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -82,6 +95,16 @@ class PostsController < ApplicationController
     render 'data.json.jbuilder'
   end
 
+  # Returns all the posts on a certain year
+  def posts_by_year
+    @year = params[:year].to_i
+    puts @year
+    @posts = Post.all.select{ |post| post.year == @year }
+    puts @posts
+
+    render 'year'
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
@@ -91,8 +114,5 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:post_title, :post_text, :post_date)
-  end
-  def tag_params
-    params.require(:tag).permit(:tag_text)
   end
 end

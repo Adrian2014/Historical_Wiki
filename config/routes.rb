@@ -10,11 +10,12 @@ Rails.application.routes.draw do
   get 'posts/getdata' => 'posts#get_data'
   get 'posts/data' => 'posts#data'
 
+  get 'posts/year/:year' => 'posts#posts_by_year'
+
   get 'posts/:id/comments/new' => 'comments#new'
   post 'posts/:id/comments/new' => 'comments#create'
 
-  get 'tags/:tag_name' => 'tags#show'
-
+  resources :tags, only: [:show]
 
   resources :posts
 

@@ -21,7 +21,7 @@ describe Post do
     end
 
     it 'should have many tags' do
-      @post.tags.create
+      @post.tags.create(tag_text: "Example Tag")
       expect(@post.tags.first).to be_a(Tag)
       expect(@post.tags.first.posts.last.id).to eq(@post.id)
     end
