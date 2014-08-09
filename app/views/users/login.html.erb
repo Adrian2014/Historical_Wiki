@@ -1,4 +1,4 @@
-  <!-- <div class="form_container"> -->
+  <section class="container">
     <h1>Sign in!</h1>
     <%= form_for @user, url: {action: "login_post"}, html: {id: "login_form"} do |f| %>
       <ul>
@@ -20,8 +20,8 @@
       </div>
       <div class="row">
         <div class="small-4 columns">
-          <%= f.submit "Sign In!", class: "button small [radius round]" %>
+          <%= f.submit "Sign In!", class: "button tiny [radius round]" %>
         </div>
       </div>
     <% end %>
-  <!-- </div> -->
+  </section>

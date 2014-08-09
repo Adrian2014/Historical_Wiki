@@ -1,2 +1,0 @@
-<p id="notice"><%= notice %></p>
-<h1><u><%= @post.post_title %></u></h1>

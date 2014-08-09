@@ -1,23 +1,25 @@
-<h1>Welcome to your Posts Page</h1>
+<section class="container">
+  <h1>Welcome to your Posts Page</h1>
 
-<ol>
-  <% @posts.each do |post| %>
+  <ol>
+    <% @posts.each do |post| %>
 
-    <li>
-      <%= link_to post.post_title, post %>
-      <%= post.post_date.strftime("%m/%d/%Y") %>
+      <li>
+        <%= link_to post.post_title, post %>
+        <%= post.post_date %>
 
-      <%= link_to 'Edit', edit_post_path(post), class: "button tiny [radius round]" %>
+        <%= link_to 'Edit', edit_post_path(post), class: "button tiny [radius round]" %>
 
-      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny [radius round]" %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny [radius round]" %>
 
-    </li>
+      </li>
 
-<% end %>
-</ol>
+  <% end %>
+  </ol>
 
-<div class="row">
-  <div class="small-4 columns">
-    <%= link_to 'New Post', new_post_path, class: "button small [radius round]" %>
+  <div class="row">
+    <div class="small-4 columns">
+      <%= link_to 'New Post', new_post_path, class: "button tiny [radius round]" %>
+    </div>
   </div>
-</div>
+</section>
