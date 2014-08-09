@@ -77,6 +77,15 @@ input[type="text"] {
   padding-bottom: 10px;
 }
 
+ol.comments li {
+  border: 1px solid #272727;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+}
+
+
 @media screen and (max-width: 980px) {
 
   section.pageheader {
