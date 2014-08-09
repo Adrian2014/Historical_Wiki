@@ -1,19 +1,19 @@
 var startYear=-6000, endYear=2100, precision=100;
 var blocks = [];
-var selected = ".timeline .canvas"
-var stack = [];
+var layer = 0;
 
 window.onload = function() {
-  var data, timeline
+  var timeline
 
   // Create the framework for the timeline
   timeline = d3.select("body")
     .insert('div', '.container')
     .attr('class','timeline');
-  timeline.append("svg").attr('class', 'canvas');
   timeline.append("span").attr('class', 'start-date').text(startYear);
   timeline.append("span").attr('class', 'end-date').text(endYear);
   $('.timeline').append("<center><a style='margin: 0 auto'>Zoom Out</a></center>")
+  timeline.append("svg").attr('class', 'canvas');
+
   timeline.append("div").attr('class', 'dropdown')
   d3.select('body').append("div").attr('class', 'clear')
 
@@ -24,12 +24,10 @@ window.onload = function() {
 
   // add onhover methods for the class
   $('.timeline').on('mouseenter', 'rect', function() { showDropdown(this); });
+  $('.timeline').on('mouseleave', function() { hideDropdown(); });
 
   $('.timeline').on('click', 'rect', function() { zoomIn(this); });
-
-  $('.timeline a').click(zoomOut);
-
-  $('.timeline').on('mouseleave', function() { hideDropdown(); });
+  $('.timeline a').click(function(){ zoomOut() });
 
   $(window).resize(drawTimeline);
 }
@@ -43,22 +41,21 @@ function showDropdown(element) {
   dropdown = $('.timeline .dropdown')
 
   if($(element).find('li').length > 0) {
-    dropdown.html($(element).html());;
+    dropdown.html($(element).html());
     dropdown.css('width', '200px')
     dropdown.css('left', (offset - dropdown.width()/2 + blockWidth()/2) + "px");
-    if(dropdown.css('left') + 200 > $(document).width()) {
-      dropdown.css('left', $(document).width() - 200)
+    if(parseInt(dropdown.css('left')) > $(window).width() - 260) {
+      dropdown.css('left', ($(window).width() - 260) + "px")
     }
-    dropdown.show();
+    dropdown.slideDown('fast');
   }
 }
 
 function hideDropdown() {
-  $('.timeline .dropdown').hide();
+  $('.timeline .dropdown').slideUp('fast');
 }
 
 function getData() {
-  var data;
   $.get(
     '/posts/getdata', 
     { start_year:startYear, end_year:endYear, precision:precision },
@@ -70,25 +67,27 @@ function getData() {
 }
 
 function drawTimeline() {
-  var baseIndex = Math.floor(startYear/precision);
-  var block, div, blockData
-
+  var blockData
 
   $('.timeline .start-date').text(parseYear(startYear))
   $('.timeline .end-date').text(parseYear(endYear))
-  $(selected).text('');
+  $('.timeline .canvas').text('');
 
-  
-  block = d3.select(selected).selectAll('rect')
+  d3.select('.timeline .canvas').selectAll('rect')
       .data(blocks.blocks)
     .enter().append("rect")
       .html(function(d) {
+        var post
         var html = ""
         d3.select(this)
           .attr('x', blockWidth() * d.index)
           .classed('q' + quantize(d.count), true)
 
-        html += "<h3>" + d.year + "</h3>"
+        html += "<h3>" + d.year
+        if(precision > 1) {
+          html += " - " + (d.year + precision)
+        }
+        html += "</h3>"
 
         for(post in d.posts) {
           blockData = d.posts[post]
@@ -146,7 +145,7 @@ function zoomIn(element) {
     startYear = Math.floor(year / (10*precision)) * 10*precision - 50 * precision
     endYear = startYear + 100*precision
 
-    d3.select(selected).append('rect')
+    d3.select(".timeline .canvas").append('rect')
       .attr('x', d3.select(element).attr('x'))
       .attr('height', d3.select(element).attr('height'))
       .attr('width', d3.select(element).attr('width'))
