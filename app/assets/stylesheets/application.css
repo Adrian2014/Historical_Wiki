@@ -14,30 +14,6 @@
  *= require_self
  */
 
- h1 {
-  margin-bottom: 30px;
- }
-
- section.pageheader {
-  background-image: url("/assets/header.jpg");
-  background-size: auto 100px;
-  height: 100px;
-  padding: 40px 100px;
- }
-
- section.pageheader h1 {
-  font-family: 'Droid Serif', serif;
-  font-size: 42px;
-  margin: 0;
-  margin-top: auto;
-  text-shadow: 0px 0px 30px rgba(255, 255, 255, 1)
- }
-
-section.pageheader img {
-  position: relative;
-  width: 100%;
-  height: 200px;
-}
  section.container {
   padding: 0 20px;
  }
@@ -77,29 +53,8 @@ input[type="text"] {
   padding-bottom: 10px;
 }
 
-ol.comments li {
-  border: 1px solid #272727;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; /* future proofing */
-  -khtml-border-radius: 10px; /* for old Konqueror browsers */
-}
-
 
 @media screen and (max-width: 980px) {
-
-  section.pageheader {
-    background-size: auto;
-    height: 60px;
-    padding-top: 30px;
-    padding-left: 40px;
-   }
-
-   section.pageheader h1 {
-    font-size: 32px;
-    margin: 0;
-    margin-top: auto;
-    text-shadow: 0px 0px 30px rgba(255, 255, 255, 1)
-   }
+  /*this for anything  that needs to resize when the viewer is resized*/
 
 }
