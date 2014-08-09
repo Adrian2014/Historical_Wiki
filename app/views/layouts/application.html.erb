@@ -14,33 +14,34 @@
 </head>
 
 <body>
-  <section class="pageheader">
-    <h1>Historical Wiki</h1>
-  </section>
-  <nav class="top-bar" data-topbar>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">Home</a></h1>
-      </li>
-      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-    </ul>
-    <section class="top-bar-section">
-      <ul class="right">
-        <% if current_user != nil %>
-          <li><%= link_to "Welcome " + current_user.username.capitalize, controller: "users", action: "show" %></li>
-          <li><%= link_to "Log out", controller: "users", action: "logout" %></li>
-        <% else %>
-          <li><%= link_to 'Sign In', controller: "users", action: "login" %></li>
-          <li><%= link_to "Register", controller: "users", action: "new" %></li>
-        <% end %>
+
+  <div class="sticky">
+    <nav class="top-bar" data-topbar>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/">Home</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
-    </section>
-  </nav>
+      <section class="top-bar-section">
+        <ul class="right">
+          <% if current_user != nil %>
+            <li><%= link_to "Welcome " + current_user.username.capitalize, controller: "users", action: "show" %></li>
+            <li><%= link_to "Log out", controller: "users", action: "logout" %></li>
+          <% else %>
+            <li><%= link_to 'Sign In', controller: "users", action: "login" %></li>
+            <li><%= link_to "Register", controller: "users", action: "new" %></li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
+  </div><br><br>
+
+  <h1>Historical Wiki</h1>
+
   <section class="container">
-
-<%= yield %>
-
+    <%= yield %>
   </section>
 
   <script src="/assets/foundation.js"></script>

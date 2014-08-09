@@ -92,7 +92,6 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:post_title, :post_text, :post_date)
   end
-
   def tag_params
     params.require(:tag).permit(:tag_text)
   end

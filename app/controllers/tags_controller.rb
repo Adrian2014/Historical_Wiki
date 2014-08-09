@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
 
-  # GET /tag/new
+  # GET /tag/:name
   def show
     tag_name = params[:tag_name]
     @tags = Tag.where(tag_text: tag_name)
