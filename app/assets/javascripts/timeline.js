@@ -1,94 +1,127 @@
-var startYear=-6000, endYear=2100, precision=100;
+var MAX_YEAR = 2100;
+var MIN_YEAR = -6000;
+
 var blocks = [];
-var selected = ".timeline .canvas"
-var stack = [];
+var precision = 100;
+
+var stack = [ [MIN_YEAR, MAX_YEAR] ];
+var lastStack = function() { return stack[stack.length - 1] }
+
+var currentLayer;
+
+function canvasWidth() {
+  return $('.timeline .frame').width();
+}
+
+function blockWidth() {
+  return (precision / (MAX_YEAR - MIN_YEAR))
+}
 
 window.onload = function() {
-  var data, timeline
+  var timeline;
 
   // Create the framework for the timeline
-  timeline = d3.select("body")
+  timeline = d3.select('body')
     .insert('div', '.container')
     .attr('class','timeline');
-  timeline.append("svg").attr('class', 'canvas');
-  timeline.append("span").attr('class', 'start-date').text(startYear);
-  timeline.append("span").attr('class', 'end-date').text(endYear);
+  timeline.append("span").attr('class', 'start-date');
+  timeline.append("span").attr('class', 'end-date');
   $('.timeline').append("<center><a style='margin: 0 auto'>Zoom Out</a></center>")
+  timeline.append("div").attr('class', 'frame')
+    .append('svg').attr('class', 'canvas')
+    .append('g');
   timeline.append("div").attr('class', 'dropdown')
   d3.select('body').append("div").attr('class', 'clear')
 
+  currentLayer = d3.select('.canvas g');
   hideDropdown();
 
   // Create the blocks on the timeline
-  getData();
+  focusCanvas(MIN_YEAR, MAX_YEAR);
+  getData(MIN_YEAR, MAX_YEAR);
 
   // add onhover methods for the class
-  $('.timeline').on('mouseenter', 'rect', function() { showDropdown(this); });
-
-  $('.timeline').on('click', 'rect', function() { zoomIn(this); });
-
-  $('.timeline a').click(zoomOut);
-
+  $('.timeline').on('mouseenter', 'g:last-child rect', function(e) { showDropdown(this, e); });
   $('.timeline').on('mouseleave', function() { hideDropdown(); });
 
-  $(window).resize(drawTimeline);
+  $('.timeline').on('click', 'g:last-child rect', function() { zoomIn(this); });
+  $('.timeline a').click(function(){ zoomOut() });
+
+  $(window).on('resize', function(e) {
+    resizeCanvas(lastStack()[0], lastStack()[1])
+  })
 }
 
 
 
 
 
-function showDropdown(element) {
+function showDropdown(element, event) {
   offset = $(element).attr('x');
   dropdown = $('.timeline .dropdown')
 
   if($(element).find('li').length > 0) {
-    dropdown.html($(element).html());;
+    dropdown.html($(element).html());
     dropdown.css('width', '200px')
-    dropdown.css('left', (offset - dropdown.width()/2 + blockWidth()/2) + "px");
-    if(dropdown.css('left') + 200 > $(document).width()) {
-      dropdown.css('left', $(document).width() - 200)
+    dropdown.css('left', (event.offsetX) + "px");
+    if(parseInt(dropdown.css('left')) > $(window).width() - 260) {
+      dropdown.css('left', ($(window).width() - 260) + "px")
     }
-    dropdown.show();
+    dropdown.slideDown('fast');
   }
 }
 
 function hideDropdown() {
-  $('.timeline .dropdown').hide();
+  $('.timeline .dropdown').slideUp('fast');
 }
 
-function getData() {
-  var data;
+function getData(startYear, endYear) {
   $.get(
     '/posts/getdata', 
     { start_year:startYear, end_year:endYear, precision:precision },
     function(response) {
       blocks = response;
-      drawTimeline();
+      drawTimeline(startYear, endYear);
     }, 'json'
   )
 }
 
-function drawTimeline() {
-  var baseIndex = Math.floor(startYear/precision);
-  var block, div, blockData
+function color_by_count (count) {
+  var scale = d3.scale.linear()
+    .domain([1, 9])
+    .range(['#555555', '#DD7733'])
 
+  if(count == 0) { return 'none' }
+  else { return scale(count) };
+}
+
+function drawTimeline(startYear, endYear) {
+  var blockData
 
   $('.timeline .start-date').text(parseYear(startYear))
   $('.timeline .end-date').text(parseYear(endYear))
-  $(selected).text('');
+  $(currentLayer.text(''));
 
-  
-  block = d3.select(selected).selectAll('rect')
+  currentLayer.selectAll('rect')
       .data(blocks.blocks)
     .enter().append("rect")
+      .classed("block", true)
+      .attr("width", 100 * blockWidth() + "%")
+      .attr('height', '27px')
       .html(function(d) {
+        var post
         var html = ""
         d3.select(this)
-          .attr('x', blockWidth() * d.index)
-          .classed('q' + quantize(d.count), true)
+          .attr('x', (100 * (d.year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) + "%")
+          .attr('fill', color_by_count(d.count))
+          .attr('stroke-width', d.count > 0 ? 1 : 0)
 
-        html += "<h3>" + d.year + "</h3>"
+        html += "<h3>" + d.year
+        if(precision > 1) {
+          console.log(precision)
+          html += " - " + (d.year + precision)
+        }
+        html += "</h3>"
 
         for(post in d.posts) {
           blockData = d.posts[post]
@@ -96,80 +129,80 @@ function drawTimeline() {
         }
         return html
       })
-      .classed("block", true)
-      .attr("width", 100/nBlocks() + "%")
-      .attr('height', '27px')
-
 }
 
-function canvasWidth() {
-  return $('.timeline .canvas').width();
+
+function focusCanvas(startYear, endYear) {
+  var magnification = (MAX_YEAR - MIN_YEAR) / (endYear - startYear);
+  var offset = (startYear - MIN_YEAR) / (MAX_YEAR - MIN_YEAR);
+  var width = canvasWidth() * magnification
+
+  d3.select('.canvas')
+    .transition()
+    .style('width', width)
+    .style('left', -offset * width)
+
+  $('.timeline .start-date').text(parseYear(startYear))
+  $('.timeline .end-date').text(parseYear(endYear))
 }
 
-function blockWidth() {
-  return canvasWidth() / nBlocks();
-}
+function resizeCanvas(startYear, endYear) {
+  var magnification = (MAX_YEAR - MIN_YEAR) / (endYear - startYear);
+  var offset = (startYear - MIN_YEAR) / (MAX_YEAR - MIN_YEAR);
+  var width = canvasWidth() * magnification
 
-function nBlocks() {
-  return Math.floor((endYear - startYear) / precision);
-}
+  d3.select('.canvas')
+    .style('width', width)
+    .style('left', -offset * width)
 
-function quantize(count) {
-  return Math.floor(count)
+  $('.timeline .start-date').text(parseYear(startYear))
+  $('.timeline .end-date').text(parseYear(endYear))
 }
 
 function zoomOut() {
+  var range
+  hideDropdown()
+
   if(precision < 100) {
     precision *= 10;
 
-    if(precision == 100) {
-      startYear = -6000
-    }
-    else {
-      startYear -= 45 * precision
-    }
+    stack.pop()
+    range = lastStack()
+    focusCanvas(range[0], range[1])
 
-    endYear += 45*precision
-    if(endYear > 2000 + precision) {
-      endYear = 2000 + precision
-    }
-    getData();
+    currentLayer.remove();
+    currentLayer = d3.select('.canvas:last_child');
   }
 }
 
 function zoomIn(element) {
-  year = startYear + (endYear - startYear) * d3.select(element).attr('x')/canvasWidth()
-  console.log(year)
+  var target = parseInt( $(element).find('h3').text() )
+  var startYear = target - 5 * precision;
+  var endYear = target + 5 * precision;
+
+  hideDropdown();
 
   if(precision > 1) {
     precision /= 10;
-    startYear = Math.floor(year / (10*precision)) * 10*precision - 50 * precision
-    endYear = startYear + 100*precision
 
-    d3.select(selected).append('rect')
-      .attr('x', d3.select(element).attr('x'))
-      .attr('height', d3.select(element).attr('height'))
-      .attr('width', d3.select(element).attr('width'))
-      .style('fill', d3.select(element).style('fill'))
-      .style('stroke', d3.select(element).style('stroke'))
-      .style('stroke-width', d3.select(element).style('stroke-width'))
-      .transition()
-      .duration(500)
-      .attr('x', 0)
-      .attr('width', '100%')
-      .style('fill', '#DDDDEE')
-      .each("end", getData)
+    focusCanvas(startYear, endYear)
+    stack.push([startYear, endYear])
+
+    currentLayer = d3.select('.canvas').append('g');
+    getData(startYear, endYear)
   }
 }
 
 function parseYear(year) {
-  var suffix
+  var suffix;
   if(year >= 0) {
-    suffix = " AD"
+    suffix = " AD";
   }
   else {
-    year *= -1
-    suffix = " BC"
+    year *= -1;
+    suffix = " BC";
   }
-  return(year + suffix)
+  return(year + suffix);
 }
+
+
