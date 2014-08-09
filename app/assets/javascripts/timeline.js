@@ -160,7 +160,7 @@ function resizeCanvas(startYear, endYear) {
 }
 
 function zoomOut() {
-  var range
+  var range;
   hideDropdown()
 
   if(precision < 100) {
@@ -171,11 +171,15 @@ function zoomOut() {
     focusCanvas(range[0], range[1])
 
     currentLayer.remove();
-    currentLayer = d3.select('.canvas:last_child');
+    currentLayer = d3.select('g:last-child')
+
+    currentLayer.transition(5000)
+      .style('opacity', 1);
   }
 }
 
 function zoomIn(element) {
+  var oldLayer;
   var target = parseInt( $(element).find('h3').text() )
   var startYear = target - 5 * precision;
   var endYear = target + 5 * precision;
@@ -188,8 +192,11 @@ function zoomIn(element) {
     focusCanvas(startYear, endYear)
     stack.push([startYear, endYear])
 
+    oldLayer = currentLayer;
     currentLayer = d3.select('.canvas').append('g');
     getData(startYear, endYear)
+    oldLayer.transition(5000)
+      .style('opacity', 0)
   }
 }
 
