@@ -1,0 +1,16 @@
+<h1>Events of <%=@year%></h1>
+
+  <tbody>
+    <ol>
+    <% @posts.each do |post| %>
+
+      <li>
+        <%= link_to post.post_title, post %></br>
+        <%= post.post_date %></br>
+      </li> </br>
+
+
+    <% end %>
+    </ol>
+
+  </tbody>

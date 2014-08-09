@@ -191,6 +191,9 @@ function zoomIn(element) {
       .duration(1000)
       .style('opacity', 0.1);
   }
+  else {
+    window.location.href = "/posts/year/" + target
+  }
 }
 
 function parseYear(year) {

@@ -82,6 +82,16 @@ class PostsController < ApplicationController
     render 'data.json.jbuilder'
   end
 
+  # Returns all the posts on a certain year
+  def posts_by_year
+    @year = params[:year].to_i
+    puts @year
+    @posts = Post.all.select{ |post| post.year == @year }
+    puts @posts
+
+    render 'year'
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
