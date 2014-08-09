@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @tag = Tag.new
+    @tags = Tag.where(post_id: params[:id])
   end
 
   # POST /posts
