@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
+<section class="container">
+  <p id="notice"><%= notice %></p>
 
 
- <h1><u><%= @comment.post_title %></u></h1></br>
- <%= @comment.post_text %></br>
- <%= @comment.post_date %></br>
+   <h1><u><%= @comment.post_title %></u></h1></br>
+   <%= @comment.post_text %></br>
+   <%= @comment.post_date %></br>
 
- <% if current_user != nil %>
- <%= link_to "Create Comment", controller: "comments", action: "new", class: "button tiny [radius round]" %>
- <% end %>
+   <% if current_user != nil %>
+   <%= link_to "Create Comment", controller: "comments", action: "new", class: "button tiny [radius round]" %>
+   <% end %>
 
-</br>
+  </br>
 
-<%= link_to 'Back', posts_path, class: "button tiny [radius round]" %>
+  <%= link_to 'Back', posts_path, class: "button tiny [radius round]" %>
+</section>
