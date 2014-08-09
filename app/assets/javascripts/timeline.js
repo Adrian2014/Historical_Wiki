@@ -57,13 +57,13 @@ window.onload = function() {
 
 
 function showDropdown(element, event) {
-  offset = $(element).attr('x');
+  var offset = event.offsetX + parseInt($(element).parent().parent().css('left')) - 100;
   dropdown = $('.timeline .dropdown')
 
   if($(element).find('li').length > 0) {
     dropdown.html($(element).html());
     dropdown.css('width', '200px')
-    dropdown.css('left', (event.offsetX) + "px");
+    dropdown.css('left', offset + "px");
     if(parseInt(dropdown.css('left')) > $(window).width() - 260) {
       dropdown.css('left', ($(window).width() - 260) + "px")
     }
@@ -103,7 +103,7 @@ function drawTimeline(startYear, endYear) {
   $(currentLayer.text(''));
 
   currentLayer.selectAll('rect')
-      .data(blocks.blocks)
+    .data(blocks.blocks)
     .enter().append("rect")
       .classed("block", true)
       .attr("width", 100 * blockWidth() + "%")
@@ -132,31 +132,23 @@ function drawTimeline(startYear, endYear) {
 }
 
 
-function focusCanvas(startYear, endYear) {
+function focusCanvas(startYear, endYear, duration) {
   var magnification = (MAX_YEAR - MIN_YEAR) / (endYear - startYear);
   var offset = (startYear - MIN_YEAR) / (MAX_YEAR - MIN_YEAR);
   var width = canvasWidth() * magnification
 
   d3.select('.canvas')
     .transition()
+    .duration(duration || 500)
     .style('width', width)
-    .style('left', -offset * width)
+    .style('left', -offset * width);
 
   $('.timeline .start-date').text(parseYear(startYear))
   $('.timeline .end-date').text(parseYear(endYear))
 }
 
 function resizeCanvas(startYear, endYear) {
-  var magnification = (MAX_YEAR - MIN_YEAR) / (endYear - startYear);
-  var offset = (startYear - MIN_YEAR) / (MAX_YEAR - MIN_YEAR);
-  var width = canvasWidth() * magnification
-
-  d3.select('.canvas')
-    .style('width', width)
-    .style('left', -offset * width)
-
-  $('.timeline .start-date').text(parseYear(startYear))
-  $('.timeline .end-date').text(parseYear(endYear))
+  focusCanvas(startYear, endYear, 1);
 }
 
 function zoomOut() {
@@ -174,6 +166,7 @@ function zoomOut() {
     currentLayer = d3.select('g:last-child')
 
     currentLayer.transition(5000)
+      .duration(100)
       .style('opacity', 1);
   }
 }
@@ -196,7 +189,8 @@ function zoomIn(element) {
     currentLayer = d3.select('.canvas').append('g');
     getData(startYear, endYear)
     oldLayer.transition(5000)
-      .style('opacity', 0)
+      .duration(1000)
+      .style('opacity', 0.1)
   }
 }
 
