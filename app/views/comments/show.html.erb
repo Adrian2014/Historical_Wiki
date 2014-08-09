@@ -6,9 +6,9 @@
  <%= @comment.post_date %></br>
 
  <% if current_user != nil %>
- <%= link_to "Create Comment", controller: "comments", action: "new", class: "button small [radius round]" %>
+ <%= link_to "Create Comment", controller: "comments", action: "new", class: "button tiny [radius round]" %>
  <% end %>
 
 </br>
 
-<%= link_to 'Back', posts_path, class: "button small [radius round]" %>
+<%= link_to 'Back', posts_path, class: "button tiny [radius round]" %>
