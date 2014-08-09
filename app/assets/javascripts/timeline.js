@@ -4,8 +4,8 @@ var MIN_YEAR = -6000;
 var blocks = [];
 var precision = 100;
 
-var stack = [ [MIN_YEAR, MAX_YEAR] ];
-var lastStack = function() { return stack[stack.length - 1] }
+var stack = [ [MIN_YEAR, MAX_YEAR] ],
+  lastStack = function() { return stack[stack.length - 1] };
 
 var currentLayer;
 
@@ -34,7 +34,7 @@ window.onload = function() {
   d3.select('body').append("div").attr('class', 'clear')
 
   currentLayer = d3.select('.canvas g');
-  hideDropdown();
+  $('.timeline .dropdown').hide();
 
   // Create the blocks on the timeline
   focusCanvas(MIN_YEAR, MAX_YEAR);
@@ -62,11 +62,11 @@ function showDropdown(element, event) {
 
   if($(element).find('li').length > 0) {
     dropdown.html($(element).html());
-    dropdown.css('width', '200px')
+    dropdown.css('width', '200px');
     dropdown.css('left', offset + "px");
     if(parseInt(dropdown.css('left')) > $(window).width() - 260) {
-      dropdown.css('left', ($(window).width() - 260) + "px")
-    }
+      dropdown.css('left', ($(window).width() - 260) + "px");
+    };
     dropdown.slideDown('fast');
   }
 }
@@ -83,16 +83,16 @@ function getData(startYear, endYear) {
       blocks = response;
       drawTimeline(startYear, endYear);
     }, 'json'
-  )
+  );
 }
 
 function color_by_count (count) {
   var scale = d3.scale.linear()
     .domain([1, 9])
-    .range(['#555555', '#DD7733'])
+    .range(['#555555', '#DD7733']);
 
-  if(count == 0) { return 'none' }
-  else { return scale(count) };
+  if(count == 0) { return 'none'; }
+  else { return scale(count); };
 }
 
 function drawTimeline(startYear, endYear) {
@@ -109,26 +109,25 @@ function drawTimeline(startYear, endYear) {
       .attr("width", 100 * blockWidth() + "%")
       .attr('height', '27px')
       .html(function(d) {
-        var post
-        var html = ""
+        var post;
+        var html = "";
         d3.select(this)
           .attr('x', (100 * (d.year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) + "%")
           .attr('fill', color_by_count(d.count))
-          .attr('stroke-width', d.count > 0 ? 1 : 0)
+          .attr('stroke-width', d.count > 0 ? 1 : 0);
 
-        html += "<h3>" + d.year
+        html += "<h3>" + parseYear(d.year);
         if(precision > 1) {
-          console.log(precision)
-          html += " - " + (d.year + precision)
+          html += " - " + parseYear((d.year + precision));
         }
-        html += "</h3>"
+        html += "</h3>";
 
         for(post in d.posts) {
-          blockData = d.posts[post]
-          html += "<li><a href='/posts/" + blockData.id + "'>" + blockData.title + "</a></li>"
+          blockData = d.posts[post];
+          html += "<li><a href='/posts/" + blockData.id + "'>" + blockData.title + "</a></li>";
         }
-        return html
-      })
+        return html;
+      });
 }
 
 
@@ -143,8 +142,8 @@ function focusCanvas(startYear, endYear, duration) {
     .style('width', width)
     .style('left', -offset * width);
 
-  $('.timeline .start-date').text(parseYear(startYear))
-  $('.timeline .end-date').text(parseYear(endYear))
+  $('.timeline .start-date').text(parseYear(startYear));
+  $('.timeline .end-date').text(parseYear(endYear));
 }
 
 function resizeCanvas(startYear, endYear) {
@@ -153,17 +152,17 @@ function resizeCanvas(startYear, endYear) {
 
 function zoomOut() {
   var range;
-  hideDropdown()
+  hideDropdown();
 
   if(precision < 100) {
     precision *= 10;
 
-    stack.pop()
-    range = lastStack()
-    focusCanvas(range[0], range[1])
+    stack.pop();
+    range = lastStack();
+    focusCanvas(range[0], range[1]);
 
     currentLayer.remove();
-    currentLayer = d3.select('g:last-child')
+    currentLayer = d3.select('g:last-child');
 
     currentLayer.transition(5000)
       .duration(100)
@@ -173,7 +172,7 @@ function zoomOut() {
 
 function zoomIn(element) {
   var oldLayer;
-  var target = parseInt( $(element).find('h3').text() )
+  var target = parseInt( $(element).find('h3').text() );
   var startYear = target - 5 * precision;
   var endYear = target + 5 * precision;
 
@@ -182,15 +181,15 @@ function zoomIn(element) {
   if(precision > 1) {
     precision /= 10;
 
-    focusCanvas(startYear, endYear)
-    stack.push([startYear, endYear])
+    focusCanvas(startYear, endYear);
+    stack.push([startYear, endYear]);
 
     oldLayer = currentLayer;
     currentLayer = d3.select('.canvas').append('g');
-    getData(startYear, endYear)
+    getData(startYear, endYear);
     oldLayer.transition(5000)
       .duration(1000)
-      .style('opacity', 0.1)
+      .style('opacity', 0.1);
   }
 }
 
