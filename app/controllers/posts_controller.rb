@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @tag = Tag.new
   end
 
   # POST /posts
@@ -45,8 +46,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
+    tag = Tag.new(tag_params)
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params) && tag.save
+        @post.tags << tag
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
