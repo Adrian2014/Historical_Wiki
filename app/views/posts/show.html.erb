@@ -1,28 +1,30 @@
-<p id="notice"><%= notice %></p>
+<section class="container">
+  <p id="notice"><%= notice %></p>
 
 
- <h1><u><%= @post.post_title %></u></h1>
+   <h1><u><%= @post.post_title %></u></h1>
 
- <strong>Tags:</strong>
-<% @tags.each do |tag| %>
-  <%=link_to "#{tag.tag_text}", "/tags/#{tag.tag_text}" %>
-<% end %>
-<br>
+   <strong>Tags:</strong>
+  <% @tags.each do |tag| %>
+    <%=link_to "#{tag.tag_text}", "/tags/#{tag.tag_text}" %>
+  <% end %>
+  <br>
 
-<p><strong>Happened:</strong> <%= @post.post_date %></p>
+  <p><strong>Happened:</strong> <%= @post.post_date %></p>
 
-<%= raw(@post.post_text) %></br>
+  <%= raw(@post.post_text) %></br>
 
-<ol class="comments">
-  <% @comments.each do |comment| %>
-    <li><%=comment.comment_text  %></li>
-  <%end %>
-</ol>
+  <ol class="comments">
+    <% @comments.each do |comment| %>
+      <li><%=comment.comment_text  %></li>
+    <%end %>
+  </ol>
 
- <% if current_user != nil %>
- <%= link_to "Create a Comment", {controller: "comments", action: "new"}, class: "button tiny [radius round]" %>
- <% end %>
+   <% if current_user != nil %>
+   <%= link_to "Create a Comment", {controller: "comments", action: "new"}, class: "button tiny [radius round]" %>
+   <% end %>
 
-</br>
+  </br>
 
-<%= link_to 'Back', posts_path, class: "button tiny [radius round]" %>
+  <%= link_to 'Back', posts_path, class: "button tiny [radius round]" %>
+</section>

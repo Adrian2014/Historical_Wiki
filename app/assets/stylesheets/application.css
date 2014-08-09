@@ -14,6 +14,11 @@
  *= require_self
  */
 
+ div.centeredcontent {
+  width: 50%;
+  margin: 0 auto;
+ }
+
  section.container {
   margin: 40px;
   padding: 30px 40px;

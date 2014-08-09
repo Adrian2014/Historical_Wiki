@@ -1,10 +1,7 @@
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <% javascript 'timeline.js' %>
 
-<h1>Listing posts</h1>
-
-
-
+<div class="container">
 <table>
   <thead>
     <tr>
@@ -13,21 +10,20 @@
   </thead>
 
   <tbody>
-    <ol>
-    <% @posts.each do |post| %>
-
-      <li>
-        <%= link_to post.post_title, post %></br>
-        <%= post.post_date %></br>
-      </li> </br>
-
-
-    <% end %>
-    </ol>
-
+    <div class="centeredcontent">
+      <h1>Listing posts</h1>
+      <ol>
+      <% @posts.each do |post| %>
+        <li>
+          <%= link_to post.post_title, post %></br>
+          <%= post.post_date %></br>
+        </li> </br>
+      <% end %>
+      </ol>
+    <div>
   </tbody>
 </table>
 
 <br>
-
+</div>
 
