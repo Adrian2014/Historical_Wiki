@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   get 'users/logout' => 'users#logout'
   get 'users/welcome' => 'users#welcome'
 
+  post 'tag/search' => 'tags#search'
+
   get 'posts/getdata' => 'posts#get_data'
   get 'posts/data' => 'posts#data'
-
   get 'posts/year/:year' => 'posts#posts_by_year'
-
   get 'posts/:id/comments/new' => 'comments#new'
   post 'posts/:id/comments/new' => 'comments#create'
 
