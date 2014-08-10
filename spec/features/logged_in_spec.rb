@@ -45,4 +45,15 @@ feature 'users who are signed in' do
       expect(page).to have_css("a[data-method='delete'][href='#{post_path(@post)}']")
     end
   end
+
+  describe "on post show page" do
+    before do
+      @post = Post.create(post_title: "New title")
+      visit post_path(@post)
+    end
+
+    it 'should allow the user to create a new comment' do
+      expect(page).to have_link("", href:page.current_path + "/comments/new")
+    end
+  end
 end

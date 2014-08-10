@@ -116,7 +116,12 @@ class PostsController < ApplicationController
     @posts = Post.all.select{ |post| post.year == @year }
     puts @posts
 
-    render 'year'
+    respond_to do |format|
+      format.html{ render 'year', layout:false }
+      format.json{ 
+        render 'year', layout: false
+      }
+    end
   end
 
   private
