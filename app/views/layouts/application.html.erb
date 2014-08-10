@@ -14,14 +14,6 @@
 
 
 
-<style>
-  #bg {
-    width:100%;
-  }
-</style>
-
-
-
 </head>
 
 <body>
@@ -33,7 +25,7 @@
   
    <% images.each_with_index do |image, index| %>
   <li>
-    <img src="<%="#{image.image_url}"%>" alt= "<%("#{index}")+1%>" />
+    <img src="<%="#{image.image_url}"%>" alt= "<%=("#{index+1}")%>" />
     <div class="orbit-caption">
     </div>
   </li>
