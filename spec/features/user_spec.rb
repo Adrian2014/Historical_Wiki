@@ -33,6 +33,7 @@ feature 'Users who are not signed in' do
     before do
       @post = Post.create(post_title: "Test port")
       @tag = @post.tags.create(tag_text: "Example tag")
+      @image = @post.image.create(image_url: "Example URL")
       visit post_url(@post)
     end
 

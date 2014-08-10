@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def show
     @comments = Comment.where(post_id: params[:id])
     @tags = Post.find(params[:id]).tags
+    @image = Post.find(params[:id]).image
   end
 
   # GET /posts/new
