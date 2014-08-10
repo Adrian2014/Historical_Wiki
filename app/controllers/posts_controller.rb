@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def show
     @comments = Comment.where(post_id: params[:id])
     @tags = Post.find(params[:id]).tags
+    @image = Post.find(params[:id]).image
   end
 
   # GET /posts/new
@@ -19,12 +20,14 @@ class PostsController < ApplicationController
     @post = Post.new
     @tags = []
     @tag = Tag.new
+    @image = Image.new
   end
 
   # GET /posts/1/edit
   def edit
     @tags = @post.tags
     @tag = Tag.new
+    @image = @post.image
   end
 
   # POST /posts
@@ -40,6 +43,8 @@ class PostsController < ApplicationController
     end
 
     @post.user_id = session[:id]
+
+    @post.image = Image.create(image_url: params["image"]["image_url"])
 
     respond_to do |format|
       if @post.save
@@ -63,6 +68,8 @@ class PostsController < ApplicationController
       new_tag = Tag.find_or_create_by(tag_text: tag_text, tag_slug: tag_text.parameterize)
       new_tag.posts.push @post unless new_tag.posts.find_by(id: @post.id)
     end
+
+    @post.image = Image.find_or_create_by(post_id: @post.id, image_url: params["image"]["image_url"])
 
     respond_to do |format|
       if @post.update(post_params)

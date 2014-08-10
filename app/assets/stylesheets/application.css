@@ -65,6 +65,11 @@ textarea {
   height: 320px;
 }
 
+.post_image {
+  float: right;
+  margin: 10px;
+}
+
 @media screen and (max-width: 980px) {
   /*this for anything  that needs to resize when the viewer is resized*/
 

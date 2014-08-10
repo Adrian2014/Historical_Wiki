@@ -49,6 +49,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'capybara'
   gem 'rack_session_access'
+  gem 'pry'
+  gem 'pry-nav'
 end
 
 group :production do

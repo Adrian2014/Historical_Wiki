@@ -1,6 +1,9 @@
 <section class="container">
   <p id="notice"><%= notice %></p>
 
+  <% if @image.image_url %>
+      <%= image_tag @image.image_url, class: "post_image" %>
+    <% end %>
 
    <h1><u><%= @post.post_title %></u></h1>
 
@@ -11,7 +14,7 @@
   <br>
 
   <p><strong>Happened:</strong> <%= @post.post_date %></p>
-
+    
   <%= raw(@post.post_text) %></br>
 
 
