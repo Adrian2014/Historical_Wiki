@@ -18,7 +18,12 @@ html {
 
 body {
   margin: 0;
+  background-image: url('http://gfx9.com/images/contents/h/i/historical-picture-material-of-the-paper-series-26-0.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
+
 
 /* HTML5 display definitions
    ========================================================================== */
@@ -129,6 +134,12 @@ dfn {
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari, and Chrome.
  */
+
+h6{
+  font-size: 3.5em;
+  margin: 0.67em 0;
+
+}
 
 h1 {
   font-size: 2em;

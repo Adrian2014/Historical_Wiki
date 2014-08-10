@@ -25,9 +25,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
     @tags = @post.tags
     @tag = Tag.new
-    @image = @post.image
+    if @post.image == nil 
+      @image = Image.new
+    else 
+      @image = @post.image
+    end
   end
 
   # POST /posts
