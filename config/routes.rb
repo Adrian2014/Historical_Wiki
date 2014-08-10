@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'users/login' => 'users#login_post'
   get 'users/show' => 'users#show'
   get 'users/logout' => 'users#logout'
+  get 'users/welcome' => 'users#welcome'
 
   get 'posts/getdata' => 'posts#get_data'
   get 'posts/data' => 'posts#data'

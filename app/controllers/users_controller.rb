@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def welcome
+    render :welcome
+  end
+
 
 
   def logout

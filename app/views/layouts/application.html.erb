@@ -11,9 +11,23 @@
 
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
+
+
+
+<style>
+  #bg {
+    width:100%;
+  }
+</style>
+
+
+
 </head>
 
 <body>
+
+ <h1>Hiki</h1>
+
 
   <div class="sticky">
     <nav class="top-bar" data-topbar>
@@ -38,10 +52,14 @@
     </nav>
   </div><br><br>
 
-  <h1>Hiki</h1>
 
+  
+
+<!-- ?autoplay=1 -->
 
     <%= yield %>
+
+  
 
 
   <script src="/assets/foundation.js"></script>
