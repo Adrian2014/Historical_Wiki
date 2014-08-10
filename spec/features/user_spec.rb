@@ -35,6 +35,7 @@ feature 'Users who are not signed in' do
       @tag = @post.tags.create(tag_text: "Example tag")
       @post.image = Image.create(image_url: "Example URL")
       @image = @post.image
+      @comment = @post.comments.create(comment_text: "test comment")
       visit post_url(@post)
     end
 
@@ -47,6 +48,14 @@ feature 'Users who are not signed in' do
     it 'links to tags' do
       expect(page).to have_link('', href: tag_path(@tag))
     end
+
+    it 'shows post comments' do
+      expect(page).to have_content(@comment.comment_text)
+    end
+
+    it 'should not allow the user to make comments' do
+      expect(page).to have_no_link("", href:page.current_path + "/comments/new")
+    end
   end
 
   context "on log in page" do
@@ -55,20 +64,8 @@ feature 'Users who are not signed in' do
       visit '/users/login'
     end
 
-    it 'logs in when a correct email and password are used' do
-      page.fill_in 'Email', with: DUMMY_USER_HASH[:email]
-      page.fill_in 'Password', with: DUMMY_USER_HASH[:password]
-      page.click_button 'Sign In!'
-
-      expect(page.get_rack_session['id']).to eq(@user.id)
-    end
-
-    it 'does not log in when an incorrect username or password is used' do
-      page.fill_in 'Email', with: DUMMY_USER_HASH[:email]
-      page.fill_in 'Password', with: "Invalid password"
-      page.click_button 'Sign In!'
-
-      expect(page.get_rack_session['id']).to eq(nil)
+    it 'can log in' do
+      expect(page).to have_css('form[action="/users/login"][method="post"]')
     end
   end
 

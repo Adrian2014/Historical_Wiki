@@ -192,7 +192,9 @@ function zoomIn(element) {
       .style('opacity', 0.15);
   }
   else {
-    window.location.href = "/posts/year/" + target
+    $.get("/posts/year/" + target, function(response) {
+      $('.content').html(response);
+    }, 'html')
   }
 }
 

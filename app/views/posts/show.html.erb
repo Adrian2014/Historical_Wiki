@@ -30,7 +30,7 @@
   </div>
 
    <% if current_user != nil %>
-   <%= link_to "Create a Comment", {controller: "comments", action: "new"}, class: "button tiny [radius round]" %>
+   <%= link_to "Create a Comment", new_post_comment_path(@post), class: "button tiny [radius round]" %>
    <% end %>
 
   </br>

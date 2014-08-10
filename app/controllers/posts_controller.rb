@@ -93,7 +93,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to '/users/show', notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -116,7 +116,12 @@ class PostsController < ApplicationController
     @posts = Post.all.select{ |post| post.year == @year }
     puts @posts
 
-    render 'year'
+    respond_to do |format|
+      format.html{ render 'year', layout:false }
+      format.json{ 
+        render 'year', layout: false
+      }
+    end
   end
 
   private
