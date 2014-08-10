@@ -48,6 +48,7 @@ gem 'spring',        group: :development
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'capybara'
+  gem 'rack_session_access'
 end
 
 group :production do

@@ -6,7 +6,7 @@
 
    <strong>Tags:</strong>
   <% @tags.each do |tag| %>
-    <%=link_to "#{tag.tag_text}", "/tags/#{tag.tag_text}" %>
+    <%=link_to "#{tag.tag_text}", tag %>
   <% end %>
   <br>
 

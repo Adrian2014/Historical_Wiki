@@ -42,4 +42,4 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 end
 
-DUMMY_USER_HASH = {username:"name", password_digest:"secure", email: "email"}
+DUMMY_USER_HASH = {username:"name", password:"secure", email: "email"}

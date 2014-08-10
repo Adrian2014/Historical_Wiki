@@ -19,4 +19,8 @@ class Tag < ActiveRecord::Base
   def build_slug
     self.tag_slug = self.tag_text.parameterize
   end
+
+  def to_param
+    self.tag_slug
+  end
 end
