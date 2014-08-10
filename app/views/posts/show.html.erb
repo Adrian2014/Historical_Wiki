@@ -14,11 +14,17 @@
 
   <%= raw(@post.post_text) %></br>
 
-  <ol class="comments">
-    <% @comments.each do |comment| %>
-      <li><%=comment.comment_text  %></li>
-    <%end %>
-  </ol>
+
+  <p></p>
+
+  <div class="comment_box">
+    <b>Comments:</b>
+    <ol class="comments">
+      <% @comments.each do |comment| %>
+        <li><%=comment.comment_text  %></li>
+      <%end %>
+    </ol>
+  </div>
 
    <% if current_user != nil %>
    <%= link_to "Create a Comment", {controller: "comments", action: "new"}, class: "button tiny [radius round]" %>
