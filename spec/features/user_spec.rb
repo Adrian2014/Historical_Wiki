@@ -69,15 +69,4 @@ feature 'Users who are not signed in' do
     end
   end
 
-  context "on new comment page" do
-    before do
-      @user = User.create(DUMMY_USER_HASH)
-      @post = Post.create(post_title: "Test post")
-    end
-
-    it 'can make a new post' do
-
-    end
-  end
-
 end
