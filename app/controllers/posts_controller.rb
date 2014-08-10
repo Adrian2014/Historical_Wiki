@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all.sort_by(&:updated_at).last(5).reverse
+    @tag = Tag.new
   end
 
   # GET /posts/1

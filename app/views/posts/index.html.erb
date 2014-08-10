@@ -1,6 +1,8 @@
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <% javascript 'timeline.js' %>
 
+
+
 <div class="container">
 <table>
   <thead>
@@ -9,8 +11,9 @@
     </tr>
   </thead>
 
+
   <tbody>
-    <div class="centeredcontent">
+    <div class="content">
       <h1>Last Five Posts</h1>
       <ol>
       <% @posts.each do |post| %>
@@ -25,5 +28,18 @@
 </table>
 
 <br>
+
+
+ <%= form_for @tag, url: "/tag/search" do |f| %>
+      <div class="row">
+        <div class="small-5 columns">
+          <%= f.text_field :tag_slug, placeholder: "Search by Tag", id: 'tag_slug', class: 'input-text'%>
+          <label class="label-helper" for="tag_slug">Search by Tag</label>
+        </div>
+        <%= f.submit "Submit", class: "button small [radius round]"%>
+      </div>     
+<% end %>
+
+
 </div>
 
