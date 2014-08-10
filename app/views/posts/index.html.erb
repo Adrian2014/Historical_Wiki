@@ -29,17 +29,18 @@
 
 <br>
 
+<div class = "container" style="background-color: #111; height: 55px;">
 
- <%= form_for @tag, url: "/tag/search" do |f| %>
-      <div class="row">
-        <div class="small-5 columns">
-          <%= f.text_field :tag_slug, placeholder: "Search by Tag", id: 'tag_slug', class: 'input-text'%>
-          <label class="label-helper" for="tag_slug">Search by Tag</label>
-        </div>
-        <%= f.submit "Submit", class: "button small [radius round]"%>
-      </div>     
-<% end %>
-
+   <%= form_for @tag, url: "/tag/search" do |f| %>
+        <div class="row">
+          <div class="small-5 columns">
+            <%= f.text_field :tag_text, placeholder: "Search by Tag", id: 'tag_text', class: 'input-text'%>
+            <label class="label-helper" for="tag_text">Search by Tag</label>
+          </div>
+          <%= f.submit "Submit", class: "button small [radius round]"%>
+        </div>     
+  <% end %>
+</div>
 
 </div>
 
