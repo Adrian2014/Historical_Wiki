@@ -27,19 +27,27 @@
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <%= f.text_area :post_text, id: 'post_text', placeholder: "Text", class: 'input-text' %>
-        <label class="label-helper" for="post_text">Text</label>
+        <%= f.text_area :post_text, id: 'post_text', placeholder: "Details", class: 'input-text' %>
+        <label class="label-helper" for="post_text">Details</label>
       </div>
-    </div>
+    </div><br>
     <%= fields_for @tag do |f| %>
       <div class="row">
-        <div class="small-4 columns">
+        <div class="small-9 columns">
           <%= f.text_field :tag_text, placeholder: "Tag(s) Seperated by Comma(s) ',' ", id: 'tag_text', class: 'input-text', value: @tags.map(&:tag_text).join(", ")%>
           <label class="label-helper" for="tag_text">Tag(s) Seperated by Comma(s)</label>
         </div>
       </div>
     <% end %>
-    <br/>
+
+    <%= fields_for @image do |f| %>
+      <div class="row">
+        <div class="small-9 columns">
+          <%= f.text_field :image_url, placeholder: 'Image URL', id: 'image_url', class: 'input-text', value: @image.image_url%>
+          <label class="label-helper" for="image_url">Image URL</label>
+        </div>
+      </div>
+    <% end %>
     </div><br/>
     <div class="row">
       <div class="small-4 columns">
