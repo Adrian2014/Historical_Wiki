@@ -1,9 +1,9 @@
 <section class="container">
   <p id="notice"><%= notice %></p>
 
-  <% if @image.image_url %>
+  <% if @image != nil %>
       <%= image_tag @image.image_url, class: "post_image" %>
-    <% end %>
+  <% end %>
 
    <h1><u><%= @post.post_title %></u></h1>
 
