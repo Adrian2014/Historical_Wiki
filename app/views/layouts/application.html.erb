@@ -28,15 +28,18 @@
 
  <h1>Hiki</h1> 
 
-
+<% if images.last != nil %>
  <ul class="example-orbit" data-orbit>
+  
+   <% images.each_with_index do |image, index| %>
   <li>
-    <img src="../assets/img/examples/satelite-orbit.jpg" alt="slide 1" />
+    <img src="<%="#{image.image_url}"%>" alt= "<%("#{index}")+1%>" />
     <div class="orbit-caption">
-      Caption One.
     </div>
   </li>
- </ul>
+   <% end %> 
+  </ul>
+  <% end %> 
 
 
   <div class="sticky">
