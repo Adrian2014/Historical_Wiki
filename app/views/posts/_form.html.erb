@@ -34,7 +34,8 @@
     <%= fields_for @tag do |f| %>
       <div class="row">
         <div class="small-4 columns">
-          <%= f.text_field :tag_text, placeholder: "Tag(s) Seperated by Comma(s) ',' ", class: 'input-text', value: @tags.map(&:tag_text).join(", ")%>
+          <%= f.text_field :tag_text, placeholder: "Tag(s) Seperated by Comma(s) ',' ", id: 'tag_text', class: 'input-text', value: @tags.map(&:tag_text).join(", ")%>
+          <label class="label-helper" for="tag_text">Tag(s) Seperated by Comma(s)</label>
         </div>
       </div>
     <% end %>
