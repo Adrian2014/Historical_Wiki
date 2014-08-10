@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:show]
 
+  resources :images, only: [:show]
+
   resources :posts
 
   root 'posts#index'
