@@ -1,0 +1,3 @@
+class ImageController < ApplicationController
+ 
+end
