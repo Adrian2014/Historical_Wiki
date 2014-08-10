@@ -165,7 +165,7 @@ function zoomOut() {
     currentLayer = d3.select('g:last-child');
 
     currentLayer.transition(5000)
-      .duration(100)
+      .duration(300)
       .style('opacity', 1);
   }
 }
@@ -189,7 +189,7 @@ function zoomIn(element) {
     getData(startYear, endYear);
     oldLayer.transition(5000)
       .duration(1000)
-      .style('opacity', 0.1);
+      .style('opacity', 0.15);
   }
   else {
     window.location.href = "/posts/year/" + target

@@ -17,13 +17,14 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @tags = []
     @tag = Tag.new
   end
 
   # GET /posts/1/edit
   def edit
-    @tag = Tag.new
     @tags = @post.tags
+    @tag = Tag.new
   end
 
   # POST /posts
