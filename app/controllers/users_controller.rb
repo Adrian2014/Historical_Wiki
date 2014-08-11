@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def blank
-    render :blank, layout: false
+    render :blank
   end
 
 
