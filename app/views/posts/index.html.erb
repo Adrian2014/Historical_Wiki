@@ -15,11 +15,11 @@
 
     <tbody>
       <div class="content" >
-        <h1 style="font-family: 'Rock Salt', cursive;">Last Five Posts</h1>
+        <h1 style="font-family: 'Maven Pro', sans-serif;">Last Five Posts</h1>
         <ol>
         <% @posts.each do |post| %>
           <li style="font-family: 'Rock Salt', cursive;">
-            <%= link_to post.post_title, post, {:style =>'font-family: ''Rock Salt'', cursive;'}%></br>
+            <%= link_to post.post_title, post, {:style =>'font-family: ''Maven Pro'', sans-serif;'}%></br>
             <%= post.post_date %></br>
           </li> </br>
         <% end %>
