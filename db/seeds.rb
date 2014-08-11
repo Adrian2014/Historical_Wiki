@@ -5,54 +5,62 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+require 'open-uri'
+require 'nokogiri'
 
 User.delete_all
 Post.delete_all
-Comment.delete_all
-Tag.delete_all
-Star.delete_all
-Image.delete_all
 
-10.times do
-  User.create( email: Faker::Internet.email,
-               username: Faker::Internet.user_name,
-               password: "temp1234",
-               password_confirmation: "temp1234",
-               )
 
-end
 
-10.times do
-  Post.create( user_id: User.all.sample.id,
-               post_title: Faker::Name.title,
-               post_text: Faker::Lorem.paragraph(4),
-               post_date: Date.today-rand(10000)
-               )
-end
+User.create( email: "admin@hiki.com",
+             username: "Admin",
+             password: "hiki1234567890",
+             password_confirmation: "hiki1234567890",
+             )
 
-10.times do
-  Comment.create( post_id: Post.all.sample.id,
-                  user_id: User.all.sample.id,
-                  comment_text: Faker::Lorem.paragraph(2)
-                  )
-end
 
-10.times do
-  Tag.create( tag_text: Faker::Hacker.noun)
-end
+# Post.create( user_id: User.first.id,
+#              post_title: Faker::Name.title,
+#              post_text: Faker::Lorem.paragraph(4),
+#              post_date: Date.today-rand(10000)
+#              )
 
-10.times do
-  PostTag.create(post_id:User.all.sample.id,
-                 tag_id:Tag.all.sample.id)
 
-end
+url = "http://simple.wikipedia.org/wiki/Attack_on_Pearl_Harbor"
+agent = Mechanize.new
+page = agent.get(url)
 
-10.times do
-  Star.create( user_id: User.all.sample.id,
-               ratings: rand(6),
-               starable_id: [Comment.all.sample.id, Post.all.sample.id].sample,
-               starable_type: [Post.to_s, Comment.to_s].sample
-               )
+pages_to_scrub = page.links
 
+pages_to_scrub.each do |link|
+  begin
+    temp = agent.get(link)
+    if temp.code.match('200')
+      temp = link.click
+      url = temp.uri.to_s
+      page = Nokogiri::HTML(open(url))
+      page_text = page.css("div.mw-content-ltr > p:first").text()
+      page_text.gsub!(/(\[.])/, "")
+      temp_date = page.css("table td:nth-child(2)")[0]
+      if temp_date != nil
+        date = page.css("table td:nth-child(2)")[0].text()
+        d = date.match(/\d{4}/)
+        d = d.to_s
+        d.insert(0,"1 January ")
+        # new_date = Chronic.parse(d)
+        nd = Date.parse(d)
+      end
+    end
+
+    Post.create(
+      user_id: User.first.id,
+      post_title: page.css("#firstHeading").inner_text(),
+      post_text: page_text,
+      post_date: nd
+    )
+  rescue Mechanize::ResponseCodeError => e
+    puts e.to_s
+    next
+  end
 end
