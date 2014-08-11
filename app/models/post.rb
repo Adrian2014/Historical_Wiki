@@ -27,6 +27,10 @@ class Post < ActiveRecord::Base
     has_many :stars, as: :starable
 
     def year
-      self.post_date.year
+      if self.post_date
+        self.post_date.year
+      else
+        0
+      end
     end
 end

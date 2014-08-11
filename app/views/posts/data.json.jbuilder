@@ -9,7 +9,9 @@ json.nBlocks @n_blocks
 
 json.blocks do
     json.array! (0...@n_blocks).to_a do |index|
-      posts = @posts.select{ |post| post.year >= @start_year + index*@precision && post.year < @start_year + index*@precision + @precision }
+      posts = @posts.select do |post| 
+        post.year >= @start_year + index*@precision && post.year < @start_year + index*@precision + @precision
+      end
       json.index index
       json.year @start_year + index*@precision
       json.count posts.count
