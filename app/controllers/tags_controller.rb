@@ -9,7 +9,7 @@ class TagsController < ApplicationController
   	end
   end
    
-  # GET /tag/:id
+  # GET /tags/:name
   def show
     puts params
     tag_slug = params[:id].parameterize

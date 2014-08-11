@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'users/logout' => 'users#logout'
   get 'users/welcome' => 'users#welcome'
 
-  post 'tag/search' => 'tags#search'
+  post 'tags/search' => 'tags#search'
 
   get 'posts/getdata' => 'posts#get_data'
   get 'posts/data' => 'posts#data'
