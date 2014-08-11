@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   get 'posts/data' => 'posts#data'
   get 'posts/year/:year' => 'posts#posts_by_year'
 
-  get 'blank' => 'users#blank'
-
   resources :posts do
     resources :comments, only: [:new, :create]
   end

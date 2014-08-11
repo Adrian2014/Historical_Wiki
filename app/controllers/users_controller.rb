@@ -44,10 +44,6 @@ class UsersController < ApplicationController
     render :welcome
   end
 
-  def blank
-    render :blank
-  end
-
 
 
   def logout
