@@ -19,6 +19,10 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'annotate'
 gem 'bcrypt'
 gem 'faker'
+gem 'mechanize'
+gem 'nokogiri'
+gem 'chronic'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
