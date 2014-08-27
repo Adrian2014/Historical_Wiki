@@ -88,11 +88,11 @@ function getData(startYear, endYear) {
 
 function color_by_count (count) {
   var scale = d3.scale.linear()
-    .domain([1, 9])
-    .range(['#555555', '#DD7733']);
+    .domain([1, 9, 10])
+    .range(['#555555', '#DD7733', '#DD7733']);
 
   if(count == 0) { return 'none'; }
-  else { return scale(count); };
+  else { return scale(count/precision); };
 }
 
 function drawTimeline(startYear, endYear) {

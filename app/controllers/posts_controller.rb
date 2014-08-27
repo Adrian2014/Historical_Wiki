@@ -69,8 +69,9 @@ class PostsController < ApplicationController
 
     @post.tags = []
 
+    puts params["tag"]["tag_text"].split(",").map(&:strip)
+
     params["tag"]["tag_text"].split(",").map(&:strip).each do |tag_text|
-      puts tag_text
       new_tag = Tag.find_or_create_by(tag_text: tag_text, tag_slug: tag_text.parameterize)
       new_tag.posts.push @post unless new_tag.posts.find_by(id: @post.id)
     end
